@@ -229,4 +229,4 @@ lists:zipwith(fun(X, Y) -> X+Y end, [1,2,3,4], [4,5,6]) => [5,7,9]
 
 1. [Erlang для самых маленьких. Глава 4: Система типов](https://habr.com/ru/post/230551/).
 2. [Higher Order Functions](https://learnyousomeerlang.com/higher-order-functions).
-3. [https://www.erlang.org/doc/man/lists.html](https://www.erlang.org/doc/man/lists.html).
+3. [lists](https://www.erlang.org/doc/man/lists.html).
