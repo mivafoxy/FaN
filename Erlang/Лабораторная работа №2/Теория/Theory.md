@@ -153,7 +153,80 @@ a
 4> high_functs:add(fun(X) -> 1 end, fun(X) -> 2 end).
 ```
 
+## Методы для работы с list
+
+Много полезных функций высшего порядка определено в модуле `lists`:
+- `all(Predicate, List)`
+    - true, если Predicate (функция из элементов списка в true/false) возвращает true на всех элементах List
+    - false, если Predicate возвращает false на каком-то элементе List
+
+```erlang
+lists:all(fun(X) -> X > 0 end, [1,-1,2]) => false
+```
+
+- `any(Predicate, List)`
+    - true, если Predicate (функция из элементов списка в true/false) возвращает true на каком-то элементе List
+    - false, если Predicate возвращает false на всех элементах List
+ 
+```erlang
+lists:any(fun(X) -> X > 0 end, [1,-1,2]) => true
+```
+
+- `dropwhile(Predicate, List)` - выбрасывает из List все начальные элементы, на которых Predicate возвращает true, и возвращает то, что осталось (т.е. часть списка, которая начинается с первого элемента, на котором предикат вернул false
+
+```erlang
+lists:dropwhile(fun(X) -> X > 0 end, [1,-1,2]) => [-1, 2]
+```
+
+- `filter(Predicate, List)` - возвращает список, состоящий только из тех элементов List, на которых Predicate возвращает true
+
+```erlang
+lists:filter(fun(X) -> X > 0 end, [1,-1,2]) => [1, 2]
+```
+
+- `foldl(Fun, Accumulator, List)` - сворачивает список. Fun -- функция от двух аргументов, первый -- элемент из списка, второй -- значение Accumulator, возвращает новое значение для Accumulator. Когда в списке не остаётся элементов, foldl возвращает значение Accumulator. Реализацию см. в lists2.erl. foldr -- аналогично, но пробегает список справа налево.
+
+```erlang
+lists:foldl(fun(X, Acc) -> X + Acc end, 0, [1,2,3]) => 6
+```
+
+- `foreach(Fun, List)` - вызывает Fun на каждом элементе в списке и отбрасывает результат
+
+- `map(Fun, List)` - возвращает список, состоящий из результатов применения Fun к каждому элементу List
+
+```erlang
+lists:map(fun(X) -> X > 0 end, [1,-1,2]) => [true, false, true]
+```
+
+- `partition(Predicate, List)` - возвращает пару списков. Первый состоит из элементов List, на которых Predicate вернул true, второй -- из тех, на которых он вернул false.
+
+```erlang
+lists:partition(fun(X) -> X > 0 end, [1,-1,2]) => {[1,2], [-1]}
+```
+
+- `sort(Fun, List)` - возвращает список List, отсортированный с помощью отношения порядка Fun. Fun(X, Y) возвращает true, если X меньше или равно Y, и false
+  в противном случае.
+
+```erlang
+lists:sort(fun(X, Y) -> length(X) <= length(Y), [[1],[1,1],[]]) => [[],[1],[1,1]]
+```
+
+`takewhile(Predicate, List)` - возвращает максимальный начальный отрезок List, на всех элементах которого Predicate возвращает true
+
+```erlang
+lists:takewhile(fun(X) -> X > 0 end, [1,-1,2]) => [1]
+```
+
+- `zipwith(Fun, List1, List2)` - возвращает список, состоящий из результатов применения Fun к парам элементов List1 и List2, стоящим на одинаковых местах. Если один из списков длиннее, "лишние" элементы отбрасываются.
+
+```erlang
+lists:zipwith(fun(X, Y) -> X+Y end, [1,2,3,4], [4,5,6]) => [5,7,9]
+```
+
+И т.д.
+
 # Ссылки на источники
 
 1. [Erlang для самых маленьких. Глава 4: Система типов](https://habr.com/ru/post/230551/).
 2. [Higher Order Functions](https://learnyousomeerlang.com/higher-order-functions).
+3. [lists](https://www.erlang.org/doc/man/lists.html).

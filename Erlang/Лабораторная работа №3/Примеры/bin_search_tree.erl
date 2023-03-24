@@ -2,5 +2,5 @@
 -export([empty/0, is_empty/1, insert/2, contains/2]).
 -import(bin_tree, [empty/0, node/3, is_empty/1, data/1, left_child/1, right_child/1, view/1]).
 
-%% Бинарное дерево поиска характеризуется тем, что у дерева
-%% (Data, Left, Right) все data в Left меньше, чем Data, а в Right - больше.
+%% Р‘РёРЅР°СЂРЅРѕРµ РґРµСЂРµРІРѕ РїРѕРёСЃРєР° С…Р°СЂР°РєС‚РµСЂРёР·СѓРµС‚СЃСЏ С‚РµРј, С‡С‚Рѕ Сѓ РґРµСЂРµРІР°
+%% (Data, Left, Right) РІСЃРµ data РІ Left РјРµРЅСЊС€Рµ, С‡РµРј Data, Р° РІ Right - Р±РѕР»СЊС€Рµ.
